@@ -2,5 +2,5 @@ require('dotenv').config();
 
 module.exports = {
   kalatoriHost: process.env.KALATORI_HOST,
-  port: process.env.PORT || 3000,
+  kalatoriPort: process.env.KALATORI_PORT || 3000,
 };

@@ -22,8 +22,8 @@ app.use(orderRoutes);
 app.use(errorMiddleware);
 
 // Start the server
-app.listen(config.port, () => {
-  console.log(`Server is running on port ${config.port}`);
+app.listen(config.kalatoriPort, () => {
+  console.log(`Server is running on port ${config.kalatoriPort}`);
 });
 
 module.exports = app; // Export the app for testing purposes

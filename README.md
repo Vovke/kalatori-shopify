@@ -35,7 +35,7 @@ Create a `.env` file in the root of your project and set the following variables
 
 ```env
 KALATORI_HOST="http://127.0.0.1:16726"
-PORT=3000
+KALATORI_PORT=3000
 ```
 
 2. **Use the Kalatori BFF Services in Your Application**:
@@ -141,11 +141,11 @@ The library uses environment variables for configuration. Create a `.env` file i
 
 ```env
 KALATORI_HOST="http://127.0.0.1:16726"
-PORT=3000
+KALATORI_PORT=3000
 ```
 
 - `KALATORI_HOST`: The host URL of the Kalatori daemon.
-- `PORT`: The port on which the BFF server will run.
+- `KALATORI_PORT`: The port on which the BFF server will run.
 
 ## Running Tests
 
