@@ -1,5 +1,6 @@
 .idea/
 .vscode/
+dist
 print_structure.sh
 output_buffer.txt
 node_modules

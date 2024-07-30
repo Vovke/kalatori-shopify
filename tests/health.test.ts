@@ -1,5 +1,5 @@
-const request = require('supertest');
-const app = require('../src/index'); // Correctly import the server instance
+import request from 'supertest';
+import app from '../src/index';
 
 describe('Health Check', () => {
   it('should return health status', async () => {
