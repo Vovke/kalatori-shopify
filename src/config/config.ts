@@ -2,14 +2,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-interface Config {
-  kalatoriHost: string;
-  kalatoriPort: number;
-}
-
-const config: Config = {
-  kalatoriHost: process.env.KALATORI_HOST || '',
-  kalatoriPort: Number(process.env.KALATORI_PORT) || 3000,
+export const config = {
+  kalatoriApiBaseUrl: process.env.KALATORI_API_BASE_URL || 'https://api.kalatori.com/v2',
+  port: process.env.PORT || 3000,
+  logLevel: process.env.LOG_LEVEL || 'info',
+  paymentSessionUrl: process.env.PAYMENT_SESSION_URL || 'https://your-kalatori-server.com/app/payment_session',
 };
-
-export default config;

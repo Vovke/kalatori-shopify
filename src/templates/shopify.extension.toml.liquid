@@ -1,0 +1,23 @@
+api_version = "2024-04"
+
+[[extensions]]
+name = "{{ name }}"
+handle = "{{ handle }}"
+type = "payments_extension"
+{% if uid %}uid = "{{ uid }}"{% endif %}
+
+merchant_label = "Kalatori Payments"
+payment_session_url = "{{ payment_session_url }}"
+supports_oversell_protection = false
+supported_countries = [
+  "US", "CA", "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE",
+  "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE"
+]
+supported_payment_methods = ["crypto", "dot", "usdc", "usdt"]
+supports_3ds = false
+supports_installments = false
+supports_deferred_payments = false
+test_mode_available = true
+
+[[extensions.targeting]]
+target = "payments.offsite.render"
