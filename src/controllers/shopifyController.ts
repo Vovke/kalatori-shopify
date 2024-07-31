@@ -1,6 +1,6 @@
 import { kalatoriController } from './kalatoriController';
 
-const createPaymentSession = async (params: any, shopDomain: string) => {
+const createPaymentSession = async (params: any) => {
   const { id, amount, currency, callback } = params;
   return await kalatoriController.createOrder(id, amount, currency, callback);
 };

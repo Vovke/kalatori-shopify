@@ -21,7 +21,7 @@ const createOrder = async (orderId: string, amount: number, currency: string, ca
 
 const getPaymentStatus = async (paymentAccount: string) => {
   try {
-    const response = await kalatoriInstance.post(`/public/v2/payment/${paymentAccount}`);
+    const response = await kalatoriInstance.post(`/v2/payment/${paymentAccount}`);
     return response.data;
   } catch (error) {
     console.error('Error in getPaymentStatus:', error.message);

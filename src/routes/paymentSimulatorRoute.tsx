@@ -15,8 +15,8 @@ import { useEffect, useState } from "react";
 import { Form, useLoaderData, useActionData } from "@remix-run/react";
 import { json, redirect } from "@remix-run/node";
 import { LoaderFunction, ActionFunction } from "@remix-run/node";
-import { getPaymentSession, RESOLVE, REJECT, PENDING } from "~/services/shopifyService";
-import PaymentsAppsClient, { PAYMENT } from "~/services/payments-apps.graphql";
+import { getPaymentSession, RESOLVE, REJECT, PENDING } from "../services/shopifyService";
+import PaymentsAppsClient, { PAYMENT } from "../payments-apps.graphql";
 
 interface PaymentSession {
   id: string;

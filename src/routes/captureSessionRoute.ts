@@ -1,6 +1,6 @@
-import { json } from "@remix-run/node";
-import { createCaptureSession } from "~/services/shopifyService";
-import { ActionFunction } from "@remix-run/node";
+import { json } from '@remix-run/node';
+import { createCaptureSession } from '../services/shopifyService';
+import { ActionFunction } from '@remix-run/node';
 
 interface CaptureSessionParams {
   id: string;
