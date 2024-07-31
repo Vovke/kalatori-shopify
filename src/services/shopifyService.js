@@ -1,10 +1,10 @@
-import { kalatoriService } from './kalatoriService';
+const kalatoriService = require('./kalatoriService');
 
-export const RESOLVE = 'RESOLVE';
-export const REJECT = 'REJECT';
-export const PENDING = 'PENDING';
+const RESOLVE = 'RESOLVE';
+const REJECT = 'REJECT';
+const PENDING = 'PENDING';
 
-export const createPaymentSession = async (params: any) => {
+const createPaymentSession = async (params) => {
   try {
     const response = await kalatoriService.createOrder(params.id, params.amount, params.currency, params.callback);
     return response;
@@ -14,7 +14,7 @@ export const createPaymentSession = async (params: any) => {
   }
 };
 
-export const getPaymentStatus = async (paymentAccount: string) => {
+const getPaymentStatus = async (paymentAccount) => {
   try {
     const response = await kalatoriService.getPaymentStatus(paymentAccount);
     return response;
@@ -24,9 +24,8 @@ export const getPaymentStatus = async (paymentAccount: string) => {
   }
 };
 
-export const getPaymentSession = async (id: string) => {
+const getPaymentSession = async (id) => {
   try {
-    // Replace this with the actual logic to get the payment session by ID
     const response = await kalatoriService.getPaymentStatus(id);
     return response;
   } catch (error) {
@@ -35,7 +34,7 @@ export const getPaymentSession = async (id: string) => {
   }
 };
 
-export const createCaptureSession = async (params: any) => {
+const createCaptureSession = async (params) => {
   try {
     const response = await kalatoriService.forceWithdrawal(params.id);
     return response;
@@ -45,7 +44,7 @@ export const createCaptureSession = async (params: any) => {
   }
 };
 
-export const createRefundSession = async (params: any) => {
+const createRefundSession = async (params) => {
   try {
     const response = await kalatoriService.createOrder(params.id, params.amount, params.currency, params.callback);
     return response;
@@ -55,7 +54,7 @@ export const createRefundSession = async (params: any) => {
   }
 };
 
-export const createVoidSession = async (params: any) => {
+const createVoidSession = async (params) => {
   try {
     const response = await kalatoriService.createOrder(params.id, params.amount, params.currency, params.callback);
     return response;
@@ -63,4 +62,16 @@ export const createVoidSession = async (params: any) => {
     console.error('Error creating void session:', error);
     throw error;
   }
+};
+
+module.exports = {
+  RESOLVE,
+  REJECT,
+  PENDING,
+  createPaymentSession,
+  getPaymentStatus,
+  getPaymentSession,
+  createCaptureSession,
+  createRefundSession,
+  createVoidSession,
 };

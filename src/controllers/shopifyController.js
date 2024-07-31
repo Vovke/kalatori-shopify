@@ -1,15 +1,15 @@
-import { kalatoriController } from './kalatoriController';
+const kalatoriController = require('./kalatoriController');
 
-const createPaymentSession = async (params: any) => {
+const createPaymentSession = async (params) => {
   const { id, amount, currency, callback } = params;
   return await kalatoriController.createOrder(id, amount, currency, callback);
 };
 
-const getPaymentStatus = async (paymentAccount: string) => {
+const getPaymentStatus = async (paymentAccount) => {
   return await kalatoriController.getPaymentStatus(paymentAccount);
 };
 
-export const shopifyController = {
+module.exports = {
   createPaymentSession,
   getPaymentStatus,
 };

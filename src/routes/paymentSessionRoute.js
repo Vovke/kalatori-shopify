@@ -1,6 +1,6 @@
-import { createPaymentSession } from '../services/shopifyService';
+const { createPaymentSession } = require('../services/shopifyService');
 
-export const action = async ({ request }) => {
+exports.action = async ({ request }) => {
   const requestBody = await request.json();
   const shopDomain = request.headers.get("shopify-shop-domain");
 

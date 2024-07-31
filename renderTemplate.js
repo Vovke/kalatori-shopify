@@ -1,15 +1,10 @@
-const fs = require('fs');
-const path = require('path');
 const dotenv = require('dotenv');
 
 dotenv.config();
 
-const templatePath = path.join(__dirname, 'templates', 'shopify.extension.toml.liquid');
-const outputPath = path.join(__dirname, 'dist', 'shopify.extension.toml');
-
-const template = fs.readFileSync(templatePath, 'utf-8');
-const rendered = template.replace('{{ payment_session_url }}', process.env.PAYMENT_SESSION_URL);
-
-fs.writeFileSync(outputPath, rendered, 'utf-8');
-
-console.log('Template rendered and saved to', outputPath);
+module.exports = {
+  kalatoriApiBaseUrl: process.env.KALATORI_API_BASE_URL || 'https://api.kalatori.com/v2',
+  port: process.env.PORT || 3000,
+  logLevel: process.env.LOG_LEVEL || 'info',
+  paymentSessionUrl: process.env.PAYMENT_SESSION_URL || 'https://your-kalatori-server.com/app/payment_session',
+};

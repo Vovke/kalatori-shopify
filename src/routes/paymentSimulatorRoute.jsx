@@ -7,43 +7,28 @@ import {
   Page,
   Text,
   Select,
-  BlockStack,
   Link,
   Banner,
-} from "@shopify/polaris";
-import { useEffect, useState } from "react";
-import { Form, useLoaderData, useActionData } from "@remix-run/react";
-import { json, redirect } from "@remix-run/node";
-import { LoaderFunction, ActionFunction } from "@remix-run/node";
-import { getPaymentSession, RESOLVE, REJECT, PENDING } from "../services/shopifyService";
-import PaymentsAppsClient, { PAYMENT } from "../payments-apps.graphql";
+} from '@shopify/polaris';
+import { useEffect, useState } from 'react';
+import { Form, useLoaderData, useActionData } from '@remix-run/react';
+import { json, redirect } from '@remix-run/node';
+import { LoaderFunction, ActionFunction } from '@remix-run/node';
+import { getPaymentSession, RESOLVE, REJECT, PENDING } from '../services/shopifyService';
+import PaymentsAppsClient, { PAYMENT } from '../payments-apps.graphql';
 
-interface PaymentSession {
-  id: string;
-  gid: string;
-  group: string;
-  amount: number;
-  currency: string;
-  test: boolean;
-  kind: string;
-  paymentMethod: string;
-  proposedAt: string;
-  cancelUrl: string;
-  shop: string;
-}
-
-export const loader: LoaderFunction = async ({ params }) => {
+export const loader = async ({ params }) => {
   const { paymentId } = params;
-  const paymentSession = await getPaymentSession(paymentId!);
+  const paymentSession = await getPaymentSession(paymentId);
   return json({ paymentSession });
 };
 
-export const action: ActionFunction = async ({ request, params }) => {
+export const action = async ({ request, params }) => {
   const formData = await request.formData();
-  const resolution = formData.get("resolution") as string;
+  const resolution = formData.get('resolution');
 
   const { paymentId } = params;
-  const paymentSession = await getPaymentSession(paymentId!);
+  const paymentSession = await getPaymentSession(paymentId);
 
   const session = (await sessionStorage.findSessionsByShop(paymentSession.shop))[0];
   const client = new PaymentsAppsClient(session.shop, session.accessToken, PAYMENT);
@@ -68,9 +53,9 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 const PaymentSimulator = () => {
   const action = useActionData();
-  const { paymentSession } = useLoaderData<{ paymentSession: PaymentSession }>();
-  const [resolution, setResolution] = useState<string>(RESOLVE);
-  const [errors, setErrors] = useState<Array<{ message: string }>>([]);
+  const { paymentSession } = useLoaderData();
+  const [resolution, setResolution] = useState(RESOLVE);
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     if (action?.errors.length > 0) setErrors(action.errors);
@@ -91,9 +76,9 @@ const PaymentSimulator = () => {
   );
 
   const resolutionOptions = [
-    { value: RESOLVE, label: "Resolve" },
-    { value: REJECT, label: "Reject" },
-    { value: PENDING, label: "Pending" },
+    { value: RESOLVE, label: 'Resolve' },
+    { value: REJECT, label: 'Reject' },
+    { value: PENDING, label: 'Pending' },
   ];
 
   return (

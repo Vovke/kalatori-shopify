@@ -1,6 +1,6 @@
-import schema from "./payments-apps.schema";
+const schema = require('./payments-apps.schema');
 
-export default class PaymentsAppsClient {
+class PaymentsAppsClient {
   constructor(shop, accessToken, type) {
     this.shop = shop;
     this.type = type || PAYMENT;
@@ -12,13 +12,13 @@ export default class PaymentsAppsClient {
   }
 
   async resolveSession({ id, gid }) {
-    const response = await this.#perform(schema[this.resolveMutation], { id: gid });
+    const response = await this.perform(schema[this.resolveMutation], { id: gid });
     if (response?.userErrors?.length === 0) await this.update?.(id, RESOLVE);
     return response;
   }
 
   async rejectSession({ id, gid }) {
-    const response = await this.#perform(schema[this.rejectMutation], {
+    const response = await this.perform(schema[this.rejectMutation], {
       id: gid,
       reason: {
         code: "PROCESSING_ERROR",
@@ -35,7 +35,7 @@ export default class PaymentsAppsClient {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-    const response = await this.#perform(schema[this.pendingMutation], {
+    const response = await this.perform(schema[this.pendingMutation], {
       id: gid,
       pendingExpiresAt: tomorrow.toISOString(),
       reason: "PARTNER_ACTION_REQUIRED"
@@ -44,7 +44,7 @@ export default class PaymentsAppsClient {
     return response;
   }
 
-  async #perform(query, variables) {
+  async perform(query, variables) {
     const apiVersion = "unstable";
     const response = await fetch(`https://${this.shop}/payments_apps/api/${apiVersion}/graphql.json`, {
       method: 'POST',
@@ -60,7 +60,7 @@ export default class PaymentsAppsClient {
   }
 
   async paymentsAppConfigure(externalHandle, ready) {
-    const response = await this.#perform(schema.paymentsAppConfigure, { externalHandle, ready });
+    const response = await this.perform(schema.paymentsAppConfigure, { externalHandle, ready });
     return response?.paymentsAppConfigure;
   }
 
@@ -91,7 +91,13 @@ export default class PaymentsAppsClient {
   }
 }
 
-export const PAYMENT = "payment";
-export const REFUND = "refund";
-export const CAPTURE = "capture";
-export const VOID = "void";
+const PAYMENT = "payment";
+const REFUND = "refund";
+const CAPTURE = "capture";
+const VOID = "void";
+
+module.exports = PaymentsAppsClient;
+module.exports.PAYMENT = PAYMENT;
+module.exports.REFUND = REFUND;
+module.exports.CAPTURE = CAPTURE;
+module.exports.VOID = VOID;
